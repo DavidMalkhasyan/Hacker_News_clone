@@ -35,9 +35,7 @@ class AuthController {
       
   
       const valid = password === user.password;  
-  
-      console.log('Password comparison result:', valid); 
-  
+    
       if (!valid) {
         return res.status(401).json({ message: "Invalid password" });
       }
@@ -46,7 +44,6 @@ class AuthController {
   
       res.json({ token });
     } catch (error) {
-      console.error('Error during login:', error);
       res.status(500).json({ message: "Internal server error" });
     }
   }

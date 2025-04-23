@@ -82,9 +82,6 @@ class Posts {
           const { text } = req.body;
           const postId = req.params.postId;
       
-          console.log("Post ID:", postId);
-          console.log("User from token:", req.user); 
-      
           const post = await Post.findById(postId);
           if (!post) {
             return res.status(404).json({ error: "Post not found" });
