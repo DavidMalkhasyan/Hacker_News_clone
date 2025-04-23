@@ -1,0 +1,39 @@
+{
+  "name": "hacker_news_clone",
+  "version": "1.0.0",
+  "description": "A minimal Hacker News clone with core features built for rapid prototyping.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidMalkhasyan/Hacker_News_clone.git"
+  },
+  "keywords": [
+    "[\"hackernews\"",
+    "\"clone\"",
+    "\"mvp\"",
+    "\"nodejs\"",
+    "\"express\"",
+    "\"javascript\"",
+    "\"minimal\"]"
+  ],
+  "author": "David Malkhassyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidMalkhasyan/Hacker_News_clone/issues"
+  },
+  "homepage": "https://github.com/DavidMalkhasyan/Hacker_News_clone#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mjs": "^1.0.0",
+    "mongoose": "^8.13.2"
+  }
+}
