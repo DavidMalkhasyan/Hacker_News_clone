@@ -1,0 +1,33 @@
+/* welcome.css */
+
+.welcome-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.welcome-table {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.welcome-td {
+  background-color: #fafaf0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+}
+
+.welcome-img {
+  width: 500px;
+  border: 0;
+}
+
+.welcome-highlight {
+  background-color: #ff6600;
+  height: 2px;
+  width: 100%;
+  display: block;
+  margin-top: 2rem;
+}

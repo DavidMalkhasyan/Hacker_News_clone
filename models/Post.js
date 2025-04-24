@@ -1,8 +1,10 @@
+const { url } = require('inspector');
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
   title: String,
   content: String,
+  url: String,
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

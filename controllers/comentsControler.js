@@ -16,6 +16,38 @@ class CommentController {
       return res.status(500).json({ error: "Error fetching comments" });
     }
   }
+
+  async getCommentsById(req, res) {
+    try {
+      const postId = req.params.postId;
+  
+      const comments = await Comment.find({ postId }).lean(); 
+  
+      const commentMap = {};
+      const roots = [];
+  
+      comments.forEach(comment => {
+        comment.replies = [];
+        commentMap[comment._id.toString()] = comment;
+      });
+  
+      comments.forEach(comment => {
+        if (comment.parentCommentId) {
+          const parent = commentMap[comment.parentCommentId.toString()];
+          if (parent) {
+            parent.replies.push(comment);
+          }
+        } else {
+          roots.push(comment);
+        }
+      });
+  
+      return res.status(200).json(roots);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+      return res.status(500).json({ error: "Error fetching comments" });
+    }
+  }
   
 
   async newComment(req, res) {

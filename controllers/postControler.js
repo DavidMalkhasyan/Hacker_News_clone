@@ -4,25 +4,49 @@ const Comment = require('../models/Comment');
 class Posts {
     async newPost(req, res) {
         try {
-            const { title, content } = req.body;
-            const post = await Post.create({ title, content });
+            const { title, content, url } = req.body;
+    
+            const post = await Post.create({
+                title,
+                content,
+                url,
+                author: req.user.id 
+            });
+    
             return res.status(201).json(post);
         } catch (error) {
             return res.status(500).json({ error: "Error creating post" });
         }
     }
-
+    
     async getPosts(req, res) {
         try {
-            const posts = await Post.find();
-            if (!posts || posts.length === 0) {
-                return res.status(404).json({ error: "Empty Data Base" });
+            const type = req.query.type;
+            const todayStart = new Date();
+            todayStart.setHours(0, 0, 0, 0);
+    
+            const tomorrowStart = new Date(todayStart);
+            tomorrowStart.setDate(tomorrowStart.getDate() + 1);
+    
+            let filter = {};
+            if (type === 'old') {
+                filter.createdAt = { $lt: todayStart };
+            } else if (type === 'today') {
+                filter.createdAt = { $gte: todayStart, $lt: tomorrowStart };
             }
+    
+            const posts = await Post.find(filter).sort({ createdAt: -1 });
+    
+            if (!posts || posts.length === 0) {
+                return res.status(404).json({ error: "No posts found" });
+            }
+    
             return res.status(200).json(posts);
         } catch (error) {
             return res.status(500).json({ error: "Error fetching posts" });
         }
     }
+    
 
     async getPost(req, res) {
         try {
