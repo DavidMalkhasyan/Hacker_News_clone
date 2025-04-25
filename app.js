@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require("dotenv");
 const postRoutes = require("./routes/postRoutes.js");
 const userRoutes = require("./routes/authRoutes.js");
+const commentRoutes = require("./routes/comentsRoutes.js");
 dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/hackernews')
@@ -18,6 +19,7 @@ app.use(cors({
 }));
 app.use("/posts", postRoutes);
 app.use("/auth", userRoutes);
+app.use("/comments", commentRoutes);
 
 app.listen(3001, () => {
   console.log("Server is running on port 3001");

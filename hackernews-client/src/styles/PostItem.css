@@ -1,0 +1,31 @@
+.post-item {
+  margin-bottom: 10px;
+}
+
+.post-index {
+  margin-right: 4px;
+}
+
+.post-title {
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.post-title:hover {
+  text-decoration: underline;
+}
+
+.post-meta {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.post-comments-link {
+  color: #666;
+  text-decoration: none;
+}
+
+.post-comments-link:hover {
+  text-decoration: underline;
+}

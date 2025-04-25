@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../styles/welcome.css";
 
 const WelcomePage = () => {
@@ -8,7 +8,7 @@ const WelcomePage = () => {
                 <tbody>
                     <tr>
                         <td className="welcome-td">
-                        <Link to="/">Hacker News</Link>
+                            <Link to="/">Hacker News</Link>
                             <br />
                             <br />
                             <b>Welcome to Hacker News</b>
@@ -97,12 +97,11 @@ const WelcomePage = () => {
                                 argument will be more convincing without them.
                             </p>
                             <p>
-                            <Link to="/">Hacker News</Link>
+                                <Link to="/">Hacker News</Link>
                                 is a bit different from other community sites,
                                 and we'd appreciate it if you'd take a minute to
                                 read the following as well as the{" "}
-                                <Link to="/">Hacker News</Link>
-                                .
+                                <Link to="/">Hacker News</Link>.
                             </p>
                             <p>
                                 HN is an experiment... (остальной текст по

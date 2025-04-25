@@ -1,4 +1,5 @@
 const Comment = require('../models/Comment'); 
+const Post = require("../models/Post");
 
 class CommentController {
   async getComments(req, res) {
@@ -20,7 +21,6 @@ class CommentController {
   async getCommentsById(req, res) {
     try {
       const postId = req.params.postId;
-  
       const comments = await Comment.find({ postId }).lean(); 
   
       const commentMap = {};
@@ -49,28 +49,37 @@ class CommentController {
     }
   }
   
-
   async newComment(req, res) {
     try {
-      const { text } = req.body;
+      const { text, parentCommentId } = req.body;
       const postId = req.params.postId;
-
-  
+      const commentId = req.params.commentId;
+      
       const post = await Post.findById(postId);
       if (!post) {
         return res.status(404).json({ error: "Post not found" });
       }
   
+      const parentComment = await Comment.findById(commentId);
+      if (!parentComment) {
+        return res.status(404).json({ error: "Parent comment not found" });
+      }
+  
       const comment = new Comment({
         text,
         postId,
-        author: req.user.id 
+        author: req.user.id,
+        parentCommentId: parentCommentId || parentComment._id
       });
   
       await comment.save();
   
       post.comments.push(comment._id);
       await post.save();
+  
+      if (!parentComment.replies) parentComment.replies = [];
+      parentComment.replies.push(comment._id);
+      await parentComment.save();
   
       return res.status(201).json(comment);
     } catch (error) {
