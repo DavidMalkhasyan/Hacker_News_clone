@@ -12,6 +12,7 @@ import WelcomePage from "./Pages/Welcome";
 import NewPage from "./Pages/NewPage";
 import PastPage from "./Pages/PastPage";
 import SubmitPage from "./Pages/SubmitPage";
+import Comment from "./Pages/CommentsPage";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -32,16 +33,8 @@ const App = () => {
                 <Route path="/welcome" element={<WelcomePage />} />
                 <Route path="/new" element={<NewPage />} />
                 <Route path="/past" element={<PastPage />} />
-                <Route
-                    path="/submit"
-                    element={
-                        isAuthenticated ? (
-                            <SubmitPage />
-                        ) : (
-                            <Navigate to="/auth" />
-                        )
-                    }
-                />
+                <Route path="/submit" element={ isAuthenticated ? (<SubmitPage />) : (<Navigate to="/auth" />)} />
+                <Route path="/comments" element={<Comment />} />
             </Routes>
         </Router>
     );

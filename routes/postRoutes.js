@@ -12,8 +12,8 @@ router.put("/:id", authMiddleware, (req, res) => PostController.updatePost(req, 
 router.delete("/:id", authMiddleware, (req, res) => PostController.deletePost(req, res));  
 router.delete("/", authMiddleware, (req, res) => PostController.deleteAllPosts(req, res));  
 
-router.post("/:postId/comments", authenticateToken, (req, res) => PostController.newComment(req, res));  
-router.get("/:postId/comments", authenticateToken, (req, res) => PostController.getComments(req, res)); 
+router.post("/:postId/comments", authMiddleware, (req, res) => PostController.newComment(req, res));  
+router.get("/:postId/comments", authMiddleware, (req, res) => PostController.getComments(req, res)); 
 
 
 
