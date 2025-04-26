@@ -19,12 +19,15 @@ class PostService {
       filter.createdAt = { $gte: todayStart, $lt: tomorrowStart };
     }
 
-    return await Post.find(filter).sort({ createdAt: -1 });
-  }
+    return await Post.find(filter)
+        .populate('author', 'username') 
+        .sort({ createdAt: -1 });
+}
 
-  async getPostById(id) {
-    return await Post.findById(id);
-  }
+
+async getPostById(id) {
+  return await Post.findById(id).populate('author', 'username');
+}
 
   async updatePost(id, { title, content }) {
     return await Post.findByIdAndUpdate(id, { title, content }, { new: true });

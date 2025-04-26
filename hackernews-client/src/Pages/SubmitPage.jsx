@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
 import api from "../utils/api";
 import "../styles/Submit.css";
-
+import Footer from "../Components/Footer";
 const SubmitPage = () => {
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
@@ -68,6 +68,7 @@ const SubmitPage = () => {
                     If there is a url, text is optional.
                 </div>
             </form>
+            <Footer />
         </>
     );
 };

@@ -17,25 +17,21 @@ const Navbar = () => {
         <div className="navbar">
             <div>
                 <Link to="/">Hacker News</Link>
-                <Link to="/welcome">welcome</Link>
+                <Link to="/welcome">Welcome</Link>
                 <Link to="/new">New</Link>
-                <Link to="/threads">threads</Link>
-                <Link to="/past">past</Link>
-                <Link to="/comments">comments</Link>
-                {/* <Link to="/ask">ask</Link>
-        <Link to="/show">show</Link>
-        <Link to="/job">job</Link> */}
-                <Link to="/submit">submit</Link>
+                <Link to="/past">Past</Link>
+                <Link to="/comments">Comments</Link>
+                <Link to="/submit">Submit</Link>
             </div>
 
             <div>
                 {isLoggedIn ? (
                     <>
-                        <span>{username} (1)</span>
-                        <span onClick={handleLogout}>logout</span>
+                        <Link to="/profile">{username}</Link>
+                        <span onClick={handleLogout}>Logout</span>
                     </>
                 ) : (
-                    <Link to="/auth">login</Link>
+                    <Link to="/auth">Login</Link>
                 )}
             </div>
         </div>

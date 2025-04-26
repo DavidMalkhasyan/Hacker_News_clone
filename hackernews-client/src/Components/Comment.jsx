@@ -45,7 +45,7 @@ const Comment = ({ comment, depth = 0, onReplySubmit }) => {
     return (
         <div className="comment" style={{ marginLeft: depth * 20 }}>
             <div>
-                <strong>{comment.username || "Anonymous"}</strong>: {comment.text}
+                <strong>{comment?.username || "Anonymous"}</strong>: {comment.text}
             </div>
 
             <button className="reply-button" onClick={() => setReplyOpen(!replyOpen)}>

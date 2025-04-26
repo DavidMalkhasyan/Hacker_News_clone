@@ -4,6 +4,7 @@ import api from '../utils/api';
 import Navbar from '../Components/Navbar';
 import Comment from '../Components/Comment'; 
 import '../styles/post.css';
+import Footer from '../Components/Footer';
 
 const PostPage = () => {
   const { id } = useParams();
@@ -106,6 +107,7 @@ const PostPage = () => {
           <button type="submit">Submit Comment</button>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

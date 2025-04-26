@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import "../styles/auth.css";
 
-const AuthPage = () => {
+const AuthPage = ({ setIsAuthenticated }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -22,8 +22,10 @@ const AuthPage = () => {
             );
 
             if (isLogin) {
+                console.log("Login response:", res.data);
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("username", username);
+                setIsAuthenticated(true);
                 navigate("/");
             }
             setPassword("");

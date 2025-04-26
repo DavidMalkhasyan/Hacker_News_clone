@@ -1,14 +1,18 @@
 .post-item {
-  margin-bottom: 10px;
+  padding: 8px 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
 }
-
 .post-index {
-  margin-right: 4px;
+  color: #828282;
+  margin-right: 5px;
+  font-size: 12px;
 }
 
 .post-title {
+  font-size: 14px;
   color: #000;
-  font-weight: bold;
   text-decoration: none;
 }
 
@@ -17,15 +21,30 @@
 }
 
 .post-meta {
-  font-size: 0.85rem;
-  color: #666;
+  margin-top: 2px;
+  font-size: 11px;
+  color: #828282;
 }
 
 .post-comments-link {
-  color: #666;
+  color: #828282;
   text-decoration: none;
 }
 
 .post-comments-link:hover {
+  text-decoration: underline;
+}
+
+.hide-button {
+  background: none;
+  border: none;
+  color: #828282;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 5px;
+}
+
+.hide-button:hover {
   text-decoration: underline;
 }

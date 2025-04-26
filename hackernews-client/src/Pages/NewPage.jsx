@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../utils/api";
 import Navbar from "../Components/Navbar";
 import PostItem from "../Components/PostItem";
-
+import Footer from "../Components/Footer";
 const NewPage = () => {
     const [posts, setPosts] = useState([]);
 
@@ -20,6 +20,7 @@ const NewPage = () => {
                     <PostItem key={post._id} post={post} index={idx + 1} />
                 ))}
             </div>
+            <Footer />
         </div>
     );
 };
