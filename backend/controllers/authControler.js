@@ -3,7 +3,6 @@ import AuthService from "../services/authService.js";
 export default class AuthController {
   constructor() {
     this.authService = new AuthService();
-    console.log("AuthController initialized", this.authService);
   }
 
   async register(req, res) {
@@ -27,7 +26,6 @@ export default class AuthController {
 
     try {
       const token = await this.authService.login({ username, password }, res);
-      console.log("Login successful, token:", token);
       return res.status(200).json({ token });
     } catch (error) {
       console.error("Error during login:", error);

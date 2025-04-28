@@ -26,13 +26,16 @@ class CommentController {
 
   async newComment(req, res) {
     try {
-      const { text, parentCommentId } = req.body;
+      const { text } = req.body;
+      const parentCommentId = req.params.commentId || req.body.parentCommentId || null;
+  
       const comment = await commentService.createComment({
         text,
         postId: req.params.postId,
         authorId: req.user.id,
         parentCommentId
       });
+  
       return res.status(201).json(comment);
     } catch (error) {
       console.error("Error creating comment:", error);
@@ -42,6 +45,7 @@ class CommentController {
       return res.status(500).json({ error: "Error creating comment" });
     }
   }
+  
 
   async deleteComment(req, res) {
     try {
@@ -64,6 +68,29 @@ class CommentController {
       res.status(500).json({ error: "Failed to fetch comments" });
     }
   }
+
+  async replyToComment(req, res) {
+    try {
+      const { text } = req.body;
+      const { postId, commentId } = req.params;
+  
+      const reply = await commentService.createReply({
+        text,
+        postId,
+        authorId: req.user.id,
+        parentCommentId: commentId,
+      });
+  
+      return res.status(201).json(reply);
+    } catch (error) {
+      console.error("Error creating reply:", error);
+      if (["Post ID must be provided", "Comment text is required", "Post not found", "Parent comment not found"].includes(error.message)) {
+        return res.status(400).json({ error: error.message });
+      }
+      return res.status(500).json({ error: "Error creating reply" });
+    }
+  }
+  
 }
 
 export default new CommentController();

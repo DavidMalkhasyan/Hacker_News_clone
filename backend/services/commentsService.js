@@ -87,6 +87,11 @@ class CommentService {
       .sort({ createdAt: -1 })
       .lean();
   }
+
+  async createReply({ text, postId, authorId, parentCommentId }) {
+    return this.createComment({ text, postId, authorId, parentCommentId });
+  }
+  
 }
 
 export default new CommentService();
