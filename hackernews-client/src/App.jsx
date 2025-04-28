@@ -18,6 +18,9 @@ import SearchPage from "./Pages/SearchPage";
 import GuidelinesPage from "./Pages/GuidelinesPage";
 import FAQPage from "./Pages/FAQPage";
 import SecurityPage from "./Pages/SecurityPage";
+import MyPostsPage from "./Pages/MyPostsPage";
+import MyCommentsPage from "./Pages/MyCommentsPage";
+
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -37,11 +40,15 @@ const App = () => {
                     element={
                         <AuthPage setIsAuthenticated={setIsAuthenticated} />
                     }
-                />{" "}
+                />
                 <Route path="/posts/:id" element={<PostPage />} />
                 <Route path="/welcome" element={<WelcomePage />} />
                 <Route path="/new" element={<NewPage />} />
                 <Route path="/past" element={<PastPage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/guidelines" element={<GuidelinesPage />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/security" element={<SecurityPage />} />
                 <Route
                     path="/submit"
                     element={
@@ -52,13 +59,29 @@ const App = () => {
                         )
                     }
                 />
-                <Route path="/comments" element={<CommentsPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/search" element={<SearchPage />} />
-                <Route path="/guidelines" element={<GuidelinesPage />} />
-                <Route path="/faq" element={<FAQPage />} />
-                <Route path="/security" element={<SecurityPage />} />
+                <Route
+                    path="/comments"
+                    element={
+                        isAuthenticated ? (
+                            <CommentsPage />
+                        ) : (
+                            <Navigate to="/auth" />
+                        )
+                    }
+                />
+                <Route
+                    path="/profile"
+                    element={
+                        isAuthenticated ? (
+                            <ProfilePage />
+                        ) : (
+                            <Navigate to="/auth" />
+                        )
+                    }
+                />
 
+                <Route path="/my-posts" element={<MyPostsPage />} />
+                <Route path="/my-comments" element={<MyCommentsPage />} />
             </Routes>
         </Router>
     );

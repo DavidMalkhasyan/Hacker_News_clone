@@ -14,7 +14,7 @@ const AllCommentsPage = () => {
                 const res = await api.get(`/comments/all`);
                 setComments(res.data);
             } catch (err) {
-                console.error("Error in uploading:", err);
+                console.error("Error fetching comments:", err);
             }
         };
         fetchComments();
@@ -34,6 +34,7 @@ const AllCommentsPage = () => {
                                 comment={comment}
                                 depth={0}
                                 onReplySubmit={() => {}} 
+                                canReply={false}
                             />
                             <hr />
                         </div>

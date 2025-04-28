@@ -82,15 +82,32 @@ class CommentService {
   }
 
   async getAllComments() {
-    return await Comment.find()
+    const comments = await Comment.find()
       .populate("author", "username")
       .sort({ createdAt: -1 })
       .lean();
-  }
-
-  async createReply({ text, postId, authorId, parentCommentId }) {
-    return this.createComment({ text, postId, authorId, parentCommentId });
-  }
+  
+    const commentMap = {};
+    const roots = [];
+  
+    comments.forEach((comment) => {
+      comment.replies = [];
+      commentMap[comment._id.toString()] = comment;
+    });
+  
+    comments.forEach((comment) => {
+      if (comment.parentCommentId) {
+        const parent = commentMap[comment.parentCommentId.toString()];
+        if (parent) {
+          parent.replies.push(comment);
+        }
+      } else {
+        roots.push(comment);
+      }
+    });
+  
+    return roots;
+  }  
   
 }
 

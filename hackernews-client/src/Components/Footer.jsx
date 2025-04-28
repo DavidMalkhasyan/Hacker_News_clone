@@ -33,7 +33,7 @@ const Footer = () => {
                     <Link to="/lists">Lists</Link> |
                     <Link to="https://github.com/HackerNews/API">API</Link> |
                     <Link to="/security">Security</Link> |
-                    <Link to="https://www.ycombinator.com/legal/">Legal</Link>
+                    <Link to="https://www.ycombinator.com/legal/">Legal</Link> |
                     <Link to="https://www.ycombinator.com/apply/">Apply to YC </Link> |
                     <Link to="mailto:contact@example.com">Contact</Link> |
                 </div>

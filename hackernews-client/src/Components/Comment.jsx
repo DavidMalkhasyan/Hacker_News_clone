@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import api from "../utils/api";
 import "../styles/post.css";
 
-const Comment = ({ comment, depth = 0, onReplySubmit }) => {
+const Comment = ({ comment, depth = 0, onReplySubmit, canReply = true }) => {
     const [replyOpen, setReplyOpen] = useState(false);
     const [replyText, setReplyText] = useState("");
     const [error, setError] = useState("");
@@ -41,6 +41,7 @@ const Comment = ({ comment, depth = 0, onReplySubmit }) => {
             setError("An error occurred while posting your reply. Please try again.");
         }
     };
+    console.log(comment?.author?.username)
 
     return (
         <div className="comment" style={{ marginLeft: depth * 20 }}>
@@ -48,11 +49,13 @@ const Comment = ({ comment, depth = 0, onReplySubmit }) => {
                 <strong>{comment?.author?.username || "Anonymous"}</strong>: {comment?.text}
             </div>
 
-            <button className="reply-button" onClick={() => setReplyOpen(!replyOpen)}>
-                {replyOpen ? "Cancel" : "Reply"}
-            </button>
+            {canReply && (
+                <button className="reply-button" onClick={() => setReplyOpen(!replyOpen)}>
+                    {replyOpen ? "Cancel" : "Reply"}
+                </button>
+            )}
 
-            {replyOpen && (
+            {canReply && replyOpen && (
                 <form onSubmit={handleReply} className="reply-form">
                     <textarea
                         value={replyText}
@@ -74,6 +77,7 @@ const Comment = ({ comment, depth = 0, onReplySubmit }) => {
                             comment={reply}
                             depth={depth + 1}
                             onReplySubmit={onReplySubmit}
+                            canReply={canReply}
                         />
                     ))}
                 </div>

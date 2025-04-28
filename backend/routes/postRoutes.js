@@ -4,6 +4,7 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+router.get("/search", PostController.searchPosts);
 
 router.get("/", PostController.getPosts);
 router.post("/", authMiddleware, PostController.newPost);  
@@ -15,6 +16,7 @@ router.delete("/", authMiddleware, PostController.deleteAllPosts);
 router.post("/:postId/comments", authMiddleware, PostController.newComment);  
 router.get("/:postId/comments", authMiddleware, PostController.getComments); 
 
+router.get("/my-posts", authMiddleware, PostController.getMyPosts);
 
 
 export default router;

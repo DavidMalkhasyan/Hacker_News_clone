@@ -58,6 +58,13 @@ async getPostById(id) {
     const post = await Post.findById(postId).populate("comments");
     return post?.comments || null;
   }
+
+  async searchPosts(query) {
+    return await Post.find({ title: { $regex: query, $options: "i" } })
+      .populate("author", "username")
+      .sort({ createdAt: -1 });
+  }
+  
 }
 
 export default new PostService();

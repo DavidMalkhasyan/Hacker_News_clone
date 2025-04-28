@@ -1,45 +1,51 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import Footer from "../Components/Footer";
+import React, { useEffect, useState } from "react";
+import api from "../utils/api";
 import Navbar from "../Components/Navbar";
-
-const posts = [
-    { id: 1, title: "AI Startup School" },
-    { id: 2, title: "React and Redux" },
-    { id: 3, title: "Building Web Apps with Node.js" },
-];
+import PostItem from "../Components/PostItem";
+import Footer from "../Components/Footer";
 
 const SearchPage = () => {
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const query = queryParams.get("query");
-    const [results, setResults] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [query, setQuery] = useState("");
 
-    useEffect(() => {
-        if (query) {
-            const filteredPosts = posts.filter((post) =>
-                post.title.toLowerCase().includes(query.toLowerCase())
-            );
-            setResults(filteredPosts);
-        }
-    }, [query]);
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryParam = urlParams.get("query");
+    setQuery(queryParam);
 
-    return (
-        <div>
-            <Navbar />
-            <h2>Search Results for: "{query}"</h2>
-            {results.length > 0 ? (
-                <ul>
-                    {results.map((post) => (
-                        <li key={post.id}>{post.title}</li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No results found</p>
-            )}
-            <Footer />
-        </div>
-    );
+    if (queryParam) {
+      api
+        .get(`/posts/search?query=${queryParam}`)
+        .then((res) => setPosts(res.data))
+        .catch((err) => console.error("Error searching posts:", err));
+    }
+  }, [window.location.search]);
+
+  const handleHidePost = (postId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div style={{ padding: "1rem" }}>
+        <h2>Search Results for "{query}"</h2>
+        {posts.length === 0 ? (
+          <div>No posts found</div>
+        ) : (
+          posts.map((post, idx) => (
+            <PostItem
+              key={post._id}
+              post={post}
+              index={idx + 1}
+              onHide={handleHidePost}
+            />
+          ))
+        )}
+      </div>
+      <Footer />
+    </div>
+  );
 };
 
 export default SearchPage;

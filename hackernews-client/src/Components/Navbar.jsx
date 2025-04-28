@@ -16,12 +16,12 @@ const Navbar = () => {
     return (
         <div className="navbar">
             <div>
-                <Link to="/">Hacker News</Link>
-                <Link to="/welcome">Welcome</Link>
-                <Link to="/new">New</Link>
-                <Link to="/past">Past</Link>
-                <Link to="/comments">Comments</Link>
-                <Link to="/submit">Submit</Link>
+                <Link to="/"> Hacker News </Link> 
+                <Link to="/welcome"> Welcome |</Link> 
+                <Link to="/new"> New |</Link> 
+                <Link to="/past"> Past |</Link>  
+                <Link to="/comments"> Comments |</Link>  
+                <Link to="/submit"> Submit </Link> 
             </div>
 
             <div>
