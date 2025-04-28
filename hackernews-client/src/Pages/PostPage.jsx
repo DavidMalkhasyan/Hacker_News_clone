@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../utils/api';
 import Navbar from '../Components/Navbar';
-import Comment from '../Components/Comment'; 
+import Comment from '../Components/Comment';
 import '../styles/post.css';
 import Footer from '../Components/Footer';
 
@@ -10,37 +10,11 @@ const PostPage = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');  
-
-  const buildCommentTree = (flatComments) => {
-    const commentMap = {};
-    const roots = [];
-
-    flatComments.forEach(comment => {
-      comment.replies = [];
-      commentMap[comment._id] = comment;
-    });
-
-    flatComments.forEach(comment => {
-      if (comment.parentId) {
-        const parent = commentMap[comment.parentId];
-        if (parent) {
-          parent.replies.push(comment);
-        }
-      } else {
-        roots.push(comment);
-      }
-    });
-
-    return roots;
-  };
+  const [newComment, setNewComment] = useState('');
 
   const fetchComments = () => {
-    api.get(`/posts/${id}/comments`)
-      .then(res => {
-        const commentTree = buildCommentTree(res.data);
-        setComments(commentTree);
-      })
+    api.get(`/comments/${id}`)
+      .then(res => setComments(res.data))
       .catch(err => console.error('Error fetching comments:', err));
   };
 
@@ -62,14 +36,14 @@ const PostPage = () => {
     if (newComment.trim()) {
       const token = localStorage.getItem("token");
 
-      api.post(`posts/${id}/comments`, { text: newComment }, {
+      api.post(`/posts/${id}/comments`, { text: newComment }, {
         headers: {
           Authorization: `Bearer ${token}`,
         }
       })
         .then(() => {
           setNewComment('');
-          fetchComments(); 
+          fetchComments();
         })
         .catch(err => console.error('Error adding comment:', err));
     }
@@ -86,14 +60,18 @@ const PostPage = () => {
 
         <h4>Comments:</h4>
 
-        {comments.map((comment) => (
-          <Comment
-            key={comment._id}
-            comment={comment}
-            depth={0}
-            onReplySubmit={fetchComments}
-          />
-        ))}
+        {comments.length > 0 ? (
+          comments.map((comment) => (
+            <Comment
+              key={comment._id}
+              comment={comment}
+              depth={0}
+              onReplySubmit={fetchComments}
+            />
+          ))
+        ) : (
+          <p>No comments yet.</p>
+        )}
 
         <form onSubmit={handleCommentSubmit}>
           <textarea

@@ -22,7 +22,6 @@ const SubmitPage = () => {
                 content: text,
                 url,
             });
-            console.log("Post created:", res.data);
 
             setTitle("");
             setUrl("");

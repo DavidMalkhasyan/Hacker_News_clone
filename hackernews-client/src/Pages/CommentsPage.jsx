@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../utils/api";
 import Navbar from "../Components/Navbar";
+import Comment from "../Components/Comment";
 import Footer from "../Components/Footer";
 import "../styles/post.css";
 
@@ -10,7 +11,7 @@ const AllCommentsPage = () => {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const res = await api.get("/comments/all");
+                const res = await api.get(`/comments/all`);
                 setComments(res.data);
             } catch (err) {
                 console.error("Error in uploading:", err);
@@ -23,19 +24,17 @@ const AllCommentsPage = () => {
         <>
             <Navbar />
             <div className="all-comments-page">
-                <h2>ВAll comments</h2>
+                <h2>All Comments</h2>
                 {comments.length === 0 ? (
-                    <p>ther is no comments</p>
+                    <p>No comments available.</p>
                 ) : (
                     comments.map((comment) => (
-                        <div key={comment._id} className="comment">
-                            <p>
-                                <strong>{comment.author?.username || "anonymus"}:</strong>{" "}
-                                {comment.text}
-                            </p>
-                            <p className="comment-time">
-                                {new Date(comment.createdAt).toLocaleString()}
-                            </p>
+                        <div key={comment._id} className="comment-container">
+                            <Comment
+                                comment={comment}
+                                depth={0}
+                                onReplySubmit={() => {}} 
+                            />
                             <hr />
                         </div>
                     ))

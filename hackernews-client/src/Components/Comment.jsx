@@ -5,7 +5,7 @@ import "../styles/post.css";
 const Comment = ({ comment, depth = 0, onReplySubmit }) => {
     const [replyOpen, setReplyOpen] = useState(false);
     const [replyText, setReplyText] = useState("");
-    const [error, setError] = useState(""); 
+    const [error, setError] = useState("");
 
     const handleReply = async (e) => {
         e.preventDefault();
@@ -45,7 +45,7 @@ const Comment = ({ comment, depth = 0, onReplySubmit }) => {
     return (
         <div className="comment" style={{ marginLeft: depth * 20 }}>
             <div>
-                <strong>{comment?.username || "Anonymous"}</strong>: {comment.text}
+                <strong>{comment?.author?.username || "Anonymous"}</strong>: {comment?.text}
             </div>
 
             <button className="reply-button" onClick={() => setReplyOpen(!replyOpen)}>
@@ -66,15 +66,18 @@ const Comment = ({ comment, depth = 0, onReplySubmit }) => {
 
             {error && <div className="error-message">{error}</div>}
 
-            {comment.replies && comment.replies.length > 0 &&
-                comment.replies.map((reply) => (
-                    <Comment
-                        key={reply._id}
-                        comment={reply}
-                        depth={depth + 1}
-                        onReplySubmit={onReplySubmit}
-                    />
-                ))}
+            {Array.isArray(comment.replies) && comment.replies.length > 0 && (
+                <div className="replies">
+                    {comment.replies.map((reply) => (
+                        <Comment
+                            key={reply._id || Math.random()}
+                            comment={reply}
+                            depth={depth + 1}
+                            onReplySubmit={onReplySubmit}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
