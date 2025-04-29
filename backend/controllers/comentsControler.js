@@ -1,5 +1,5 @@
 import commentService from "../services/commentsService.js";
-
+import Comment from "../models/Comment.js"; 
 class CommentController {
     async getComments(req, res) {
         try {
@@ -60,7 +60,7 @@ class CommentController {
 
     async deleteComment(req, res) {
         try {
-            await commentService.deleteComment(req.params.id);
+            await commentService.deleteComment(req.params._id);
             return res
                 .status(200)
                 .json({ message: "Comment deleted successfully" });
@@ -117,8 +117,8 @@ class CommentController {
             res.status(200).json(comments);
         } catch (error) {
             console.error("Error getting my comments:", error);
-            res.status(500).json({ message: "Internal server error" });
-        }
+            res.status(500).json({ message: "Internal server error", error: error.message });
+        }        
     }
 }
 

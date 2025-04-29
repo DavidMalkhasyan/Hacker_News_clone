@@ -9,16 +9,18 @@ class CommentService {
   }
 
   async getCommentsWithReplies(postId) {
-    const comments = await Comment.find({ postId }).lean();
-    
+    const comments = await Comment.find({ postId })
+      .populate("author", "username")
+      .lean();
+  
     const commentMap = {};
     const roots = [];
-
+  
     comments.forEach((comment) => {
       comment.replies = [];
       commentMap[comment._id.toString()] = comment;
     });
-
+  
     comments.forEach((comment) => {
       if (comment.parentCommentId) {
         const parent = commentMap[comment.parentCommentId.toString()];
@@ -27,9 +29,9 @@ class CommentService {
         roots.push(comment);
       }
     });
-
+  
     return roots;
-  }
+  }  
 
   async createComment({ text, postId, authorId, parentCommentId }) {
     if (!postId) throw new Error("Post ID must be provided");
@@ -111,4 +113,4 @@ class CommentService {
   
 }
 
-export default new CommentService();
+export default new CommentService(); 
