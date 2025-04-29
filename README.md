@@ -66,15 +66,25 @@ npm run dev
 🧩 API Endpoints
 
 Method	Endpoint	Description	Protected
+
 POST	/api/auth/register	Register a new user	❌
+
 POST	/api/auth/login	Login user and get token	❌  
+
 GET	/api/posts	Get all posts	❌
+
 GET	/api/posts/:id	Get single post by ID	❌
+
 POST	/api/posts	Create new post	✅
+
 PUT	/api/posts/:id	Update post by ID	✅
+
 DELETE	/api/posts/:id	Delete post by ID	✅
+
 POST	/api/posts/:id/comments	Add comment to post	✅
+
 GET	/api/posts/:id/comments	Get all comments for post	❌
+
 ⚙️ Scripts
 
 Command	Purpose
