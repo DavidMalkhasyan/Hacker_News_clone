@@ -30,7 +30,14 @@ dotenv for environment variables
 
 cors for Cross-Origin Resource Sharing
 
-React 
+Frontend:
+
+React
+
+Axios
+
+React Router DOM
+
 
 📦 Installation
 Clone the repository:
@@ -49,7 +56,7 @@ Create a .env file in the root directory and add the following:
 ini
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
-PORT=5000
+PORT=3000
 Start the server:
 
 bash
@@ -60,7 +67,7 @@ npm run dev
 
 Method	Endpoint	Description	Protected
 POST	/api/auth/register	Register a new user	❌
-POST	/api/auth/login	Login user and get token	❌
+POST	/api/auth/login	Login user and get token	❌  
 GET	/api/posts	Get all posts	❌
 GET	/api/posts/:id	Get single post by ID	❌
 POST	/api/posts	Create new post	✅
@@ -87,14 +94,18 @@ bash
  ├── server.js
  └── .env
  
-🌟 Future Improvements
-Add password reset functionality
+✨ Features
+User registration & login (JWT auth)
 
-Improve input validation (using Joi or express-validator)
+Create and delete posts
 
-Rate limiting & security hardening
+Comment on posts with nested replies
 
-Deployment on cloud (Render, Vercel, Railway, AWS)
+Public homepage with posts
+
+Protected routes for creating content
+
+Responsive and minimal using
 
 📜 License
 This project is licensed under the MIT License.
