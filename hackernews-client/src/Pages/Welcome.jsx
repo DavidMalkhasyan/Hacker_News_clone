@@ -104,8 +104,7 @@ const WelcomePage = () => {
                                 <Link to="/">Hacker News</Link>.
                             </p>
                             <p>
-                                HN is an experiment... (остальной текст по
-                                аналогии)
+                                HN is an experiment... 
                             </p>
                         </td>
                     </tr>
