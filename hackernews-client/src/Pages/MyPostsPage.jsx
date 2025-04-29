@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../utils/api";
+import api from "../utils/api"; 
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
@@ -20,9 +20,10 @@ const MyPostsPage = () => {
         const res = await api.get("/posts/my-posts", {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         setPosts(res.data);
       } catch (err) {
-        console.error("Error loading posts:", err);
+        console.error("Error loading posts:", err.response ? err.response.data : err);
       }
     };
 
@@ -41,7 +42,6 @@ const MyPostsPage = () => {
             <div key={post._id} className="post">
               <h3>{post.title}</h3>
               <p>{post.content}</p>
-              {}
             </div>
           ))
         )}

@@ -41,8 +41,6 @@ const Comment = ({ comment, depth = 0, onReplySubmit, canReply = true }) => {
             setError("An error occurred while posting your reply. Please try again.");
         }
     };
-    console.log(comment?.author?.username)
-
     return (
         <div className="comment" style={{ marginLeft: depth * 20 }}>
             <div>
